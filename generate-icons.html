@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sea Service Logger — Icon Generator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: monospace; background: #1a1816; color: #e8dcc4;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 40px 20px; gap: 28px;
+    }
+    h2   { color: #ff8c32; letter-spacing: 0.08em; font-size: 14px; text-transform: uppercase; }
+    h3   { color: #a8987a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+    p, li { color: #a8987a; font-size: 12px; line-height: 1.8; }
+    .previews { display: flex; gap: 24px; align-items: flex-end; flex-wrap: wrap; justify-content: center; }
+    .preview  { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .preview span { font-size: 10px; color: #3a3530; }
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    button {
+      background: transparent; border: 2px solid #ff8c32; color: #ff8c32;
+      font-family: monospace; font-size: 12px; padding: 9px 22px; cursor: pointer;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    button:hover { background: #ff8c32; color: #1a1816; }
+    .instructions {
+      border: 1px solid #3a3530; padding: 20px 24px; max-width: 520px; width: 100%;
+    }
+    .instructions ol { padding-left: 18px; }
+    .instructions li { margin-bottom: 6px; }
+    code { color: #ff8c32; font-size: 11px; }
+    .section-label {
+      font-size: 10px; color: #3a3530; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 8px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h2>Sea Service Logger · Icon Generator</h2>
+  <p>Generates all icon sizes for the PWA manifest and Android launcher.</p>
+
+  <!-- Hidden canvases used to generate at full res -->
+  <canvas id="c512" width="512" height="512" class="hidden"></canvas>
+  <canvas id="c192" width="192" height="192" class="hidden"></canvas>
+  <canvas id="c192r" width="192" height="192" class="hidden"></canvas><!-- round -->
+  <canvas id="c144" width="144" height="144" class="hidden"></canvas>
+  <canvas id="c144r" width="144" height="144" class="hidden"></canvas>
+  <canvas id="c96"  width="96"  height="96"  class="hidden"></canvas>
+  <canvas id="c96r" width="96"  height="96"  class="hidden"></canvas>
+  <canvas id="c72"  width="72"  height="72"  class="hidden"></canvas>
+  <canvas id="c72r" width="72"  height="72"  class="hidden"></canvas>
+  <canvas id="c48"  width="48"  height="48"  class="hidden"></canvas>
+  <canvas id="c48r" width="48"  height="48"  class="hidden"></canvas>
+
+  <!-- Visible previews -->
+  <div>
+    <div class="section-label">Preview</div>
+    <div class="previews" id="previews"></div>
+  </div>
+
+  <div class="btn-group">
+    <button onclick="downloadPWA()">Download PWA icons</button>
+    <button onclick="downloadAndroid()">Download Android icons</button>
+    <button onclick="downloadAll()">Download all</button>
+  </div>
+
+  <div class="instructions">
+    <h3>Where to put the files</h3>
+    <br>
+    <p><strong style="color:#e8dcc4">PWA (manifest)</strong></p>
+    <ol>
+      <li>Save <code>icon-512.png</code> → <code>assets/icon-512.png</code></li>
+      <li>Save <code>icon-192.png</code> → <code>assets/icon-192.png</code></li>
+    </ol>
+    <br>
+    <p><strong style="color:#e8dcc4">Android launcher icons</strong></p>
+    <ol>
+      <li>Open <code>android/app/src/main/res/</code></li>
+      <li>Replace <code>ic_launcher.png</code> and <code>ic_launcher_round.png</code> in each mipmap folder:<br><br>
+        <code>mipmap-mdpi/</code> → 48 px files<br>
+        <code>mipmap-hdpi/</code> → 72 px files<br>
+        <code>mipmap-xhdpi/</code> → 96 px files<br>
+        <code>mipmap-xxhdpi/</code> → 144 px files<br>
+        <code>mipmap-xxxhdpi/</code> → 192 px files
+      </li>
+    </ol>
+    <br>
+    <p style="color:#3a3530; font-size:11px">
+      Files labelled <code>-round</code> are the circular launcher variant (same icon, circular crop).
+      Place them as <code>ic_launcher_round.png</code> in each folder.
+    </p>
+  </div>
+
+  <script>
+    // ── Core draw function ────────────────────────────────────────
+    // Design: 8-spoke ship's wheel in burnt orange (#ff8c32) on deep charcoal (#1a1816).
+    // Rounded-square background for square variant; circular for round variant.
+
+    function drawIcon(canvas, round = false) {
+      const size = canvas.width;
+      const ctx  = canvas.getContext('2d');
+      const cx   = size / 2;
+      const cy   = size / 2;
+      const s    = size / 512;
+
+      ctx.clearRect(0, 0, size, size);
+
+      // Background
+      const bgRadius = round ? size / 2 : Math.round(88 * s);
+      ctx.fillStyle = '#1a1816';
+      ctx.beginPath();
+      if (round) {
+        ctx.arc(cx, cy, size / 2, 0, Math.PI * 2);
+      } else {
+        ctx.moveTo(bgRadius, 0);
+        ctx.lineTo(size - bgRadius, 0);
+        ctx.quadraticCurveTo(size, 0, size, bgRadius);
+        ctx.lineTo(size, size - bgRadius);
+        ctx.quadraticCurveTo(size, size, size - bgRadius, size);
+        ctx.lineTo(bgRadius, size);
+        ctx.quadraticCurveTo(0, size, 0, size - bgRadius);
+        ctx.lineTo(0, bgRadius);
+        ctx.quadraticCurveTo(0, 0, bgRadius, 0);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+      if (round) { ctx.save(); ctx.clip(); }
+
+      // Ship's wheel
+      const outerR  = Math.round(188 * s);
+      const innerR  = Math.round(68 * s);
+      const rimW    = Math.round(22 * s);
+      const spokeW  = Math.round(16 * s);
+      const handleR = Math.round(26 * s);
+
+      ctx.strokeStyle = '#ff8c32';
+      ctx.fillStyle   = '#ff8c32';
+      ctx.lineCap     = 'round';
+
+      ctx.lineWidth = rimW;
+      ctx.beginPath(); ctx.arc(cx, cy, outerR, 0, Math.PI * 2); ctx.stroke();
+
+      ctx.lineWidth = spokeW;
+      ctx.beginPath(); ctx.arc(cx, cy, innerR, 0, Math.PI * 2); ctx.stroke();
+
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2 - Math.PI / 8;
+        ctx.lineWidth = spokeW;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(angle) * (innerR + spokeW / 2),
+                   cy + Math.sin(angle) * (innerR + spokeW / 2));
+        ctx.lineTo(cx + Math.cos(angle) * (outerR - rimW / 2),
+                   cy + Math.sin(angle) * (outerR - rimW / 2));
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx + Math.cos(angle) * (outerR + handleR * 0.5),
+                cy + Math.sin(angle) * (outerR + handleR * 0.5),
+                handleR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.beginPath(); ctx.arc(cx, cy, innerR - spokeW / 2, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = '#1a1816';
+      ctx.beginPath(); ctx.arc(cx, cy, Math.round(22 * s), 0, Math.PI * 2); ctx.fill();
+
+      if (round) ctx.restore();
+    }
+
+    // ── Canvases config ───────────────────────────────────────────
+    const ICONS = [
+      { id: 'c512',  size: 512, round: false, filename: 'icon-512.png',             group: 'pwa' },
+      { id: 'c192',  size: 192, round: false, filename: 'icon-192.png',             group: 'pwa' },
+      { id: 'c192r', size: 192, round: true,  filename: 'ic_launcher_xxxhdpi.png',  group: 'android' },
+      { id: 'c192',  size: 192, round: false, filename: 'ic_launcher_xxxhdpi_square.png', group: 'android' },
+      { id: 'c144',  size: 144, round: false, filename: 'ic_launcher_xxhdpi.png',   group: 'android' },
+      { id: 'c144r', size: 144, round: true,  filename: 'ic_launcher_round_xxhdpi.png', group: 'android' },
+      { id: 'c96',   size: 96,  round: false, filename: 'ic_launcher_xhdpi.png',    group: 'android' },
+      { id: 'c96r',  size: 96,  round: true,  filename: 'ic_launcher_round_xhdpi.png', group: 'android' },
+      { id: 'c72',   size: 72,  round: false, filename: 'ic_launcher_hdpi.png',     group: 'android' },
+      { id: 'c72r',  size: 72,  round: true,  filename: 'ic_launcher_round_hdpi.png', group: 'android' },
+      { id: 'c48',   size: 48,  round: false, filename: 'ic_launcher_mdpi.png',     group: 'android' },
+      { id: 'c48r',  size: 48,  round: true,  filename: 'ic_launcher_round_mdpi.png', group: 'android' },
+    ];
+
+    // Render all
+    const rendered = {};
+    for (const icon of ICONS) {
+      if (!rendered[icon.id]) {
+        const canvas = document.getElementById(icon.id);
+        drawIcon(canvas, icon.round);
+        rendered[icon.id] = true;
+      }
+    }
+
+    // Add visible previews (square only, scaled)
+    const PREVIEW_SIZES = [512, 192, 144, 96, 72, 48];
+    const container = document.getElementById('previews');
+    for (const size of PREVIEW_SIZES) {
+      const srcCanvas = document.querySelector(`canvas[width="${size}"]:not([id$="r"])`);
+      if (!srcCanvas) continue;
+      const preview = document.createElement('canvas');
+      const displaySize = Math.max(32, Math.round(size * 0.3));
+      preview.width  = size;
+      preview.height = size;
+      drawIcon(preview, false);
+      preview.style.width  = displaySize + 'px';
+      preview.style.height = displaySize + 'px';
+      const wrap = document.createElement('div');
+      wrap.className = 'preview';
+      const label = document.createElement('span');
+      label.textContent = size + 'px';
+      wrap.appendChild(preview);
+      wrap.appendChild(label);
+      container.appendChild(wrap);
+    }
+
+    // ── Download helpers ──────────────────────────────────────────
+    function dl(canvasId, filename, delay = 0) {
+      return new Promise(resolve => setTimeout(() => {
+        const canvas = document.getElementById(canvasId);
+        const a = document.createElement('a');
+        a.href     = canvas.toDataURL('image/png');
+        a.download = filename;
+        a.click();
+        resolve();
+      }, delay));
+    }
+
+    async function downloadPWA() {
+      await dl('c512', 'icon-512.png', 0);
+      await dl('c192', 'icon-192.png', 400);
+    }
+
+    async function downloadAndroid() {
+      const androidIcons = [
+        ['c192',  'ic_launcher_xxxhdpi.png'],
+        ['c192r', 'ic_launcher_round_xxxhdpi.png'],
+        ['c144',  'ic_launcher_xxhdpi.png'],
+        ['c144r', 'ic_launcher_round_xxhdpi.png'],
+        ['c96',   'ic_launcher_xhdpi.png'],
+        ['c96r',  'ic_launcher_round_xhdpi.png'],
+        ['c72',   'ic_launcher_hdpi.png'],
+        ['c72r',  'ic_launcher_round_hdpi.png'],
+        ['c48',   'ic_launcher_mdpi.png'],
+        ['c48r',  'ic_launcher_round_mdpi.png'],
+      ];
+      for (let i = 0; i < androidIcons.length; i++) {
+        await dl(androidIcons[i][0], androidIcons[i][1], i * 350);
+      }
+    }
+
+    async function downloadAll() {
+      await downloadPWA();
+      setTimeout(downloadAndroid, 1000);
+    }
+  </script>
+</body>
+</html>

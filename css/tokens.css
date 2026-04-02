@@ -1,0 +1,131 @@
+/* ============================================================
+   SEA SERVICE LOGGER — Design Tokens
+   Monospace · Radar aesthetic · Warm dark theme
+   ============================================================ */
+
+:root {
+  /* --- Colour: Dark (default) --- */
+  --color-bg-base:        #1a1816;
+  --color-bg-deep:        #0f0e0c;
+  --color-bg-panel:       #252220;
+  --color-bg-elevated:    #2e2b28;
+  --color-bg-input:       #1e1c1a;
+
+  --color-accent:         #ff8c32;
+  --color-accent-dim:     #c86a1e;
+  --color-accent-glow:    rgba(255, 140, 50, 0.15);
+  --color-accent-subtle:  rgba(255, 140, 50, 0.08);
+
+  --color-text-primary:   #e8dcc4;
+  --color-text-secondary: #a8987a;
+  --color-text-tertiary:  #6b5f4a;
+  --color-text-inverse:   #0f0e0c;
+
+  --color-border:         #3a3530;
+  --color-border-subtle:  #2a2724;
+  --color-border-focus:   #ff8c32;
+
+  --color-status-underway: #ff8c32;
+  --color-status-anchor:   #c8a850;
+  --color-status-off:      #4a4540;
+
+  --color-success:        #5a9e6a;
+  --color-warning:        #c8a850;
+  --color-error:          #c85050;
+
+  /* --- Typography --- */
+  --font-mono: "Courier New", "Courier", "Lucida Console", monospace;
+
+  --text-xxs:  10px;
+  --text-xs:   11px;
+  --text-sm:   12px;
+  --text-base: 13px;
+  --text-md:   15px;
+  --text-lg:   18px;
+  --text-xl:   24px;
+  --text-2xl:  32px;
+  --text-3xl:  48px;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold:   700;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.08em;
+  --tracking-widest:  0.12em;
+
+  --leading-tight:  1.2;
+  --leading-normal: 1.5;
+  --leading-loose:  1.8;
+
+  /* --- Spacing --- */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+
+  /* --- Radius --- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* --- Borders --- */
+  --border-thin:   0.5px;
+  --border-base:   1px;
+  --border-thick:  2px;
+
+  /* --- Shadows --- */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:     0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lg:     0 8px 24px rgba(0,0,0,0.6);
+  --shadow-accent: 0 0 12px rgba(255, 140, 50, 0.2);
+
+  /* --- Transitions --- */
+  --transition-fast:   80ms ease;
+  --transition-base:  150ms ease;
+  --transition-slow:  250ms ease;
+
+  /* --- Layout --- */
+  --tab-bar-height: 60px;
+  --safe-bottom:    env(safe-area-inset-bottom, 0px);
+  --max-width:      480px;
+}
+
+/* --- Light mode override --- */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-base:        #f5f2ec;
+    --color-bg-deep:        #ede9e1;
+    --color-bg-panel:       #eae6de;
+    --color-bg-elevated:    #ffffff;
+    --color-bg-input:       #ffffff;
+
+    --color-accent:         #d97706;
+    --color-accent-dim:     #b45e05;
+    --color-accent-glow:    rgba(217, 119, 6, 0.12);
+    --color-accent-subtle:  rgba(217, 119, 6, 0.06);
+
+    --color-text-primary:   #1a1512;
+    --color-text-secondary: #5a4e38;
+    --color-text-tertiary:  #9a8e78;
+    --color-text-inverse:   #f5f2ec;
+
+    --color-border:         #c8bfaa;
+    --color-border-subtle:  #ddd6c8;
+
+    --color-status-off:     #c8bfaa;
+
+    --shadow-sm:    0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md:    0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg:    0 8px 24px rgba(0,0,0,0.12);
+    --shadow-accent:0 0 12px rgba(217, 119, 6, 0.15);
+  }
+}

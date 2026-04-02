@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)"/>
+  <meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="description" content="MCA/NMC compliant sea service tracking for maritime professionals"/>
+
+  <title>Sea Service Logger</title>
+
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── Screens ─────────────────────────────────────── -->
+
+  <!-- Calendar (left / past) -->
+  <main id="screen-calendar" class="screen" role="main" aria-label="Calendar">
+  </main>
+
+  <!-- Dashboard (centre / present) -->
+  <main id="screen-dashboard" class="screen" role="main" aria-label="Dashboard">
+  </main>
+
+  <!-- Profile / Export (right / future) -->
+  <main id="screen-profile" class="screen" role="main" aria-label="Profile and export">
+  </main>
+
+  <!-- ── Tab bar ──────────────────────────────────────── -->
+  <nav class="tab-bar" role="tablist" aria-label="Main navigation">
+
+    <!-- Calendar tab — Hourglass/diamond glyph -->
+    <button
+      class="tab-btn"
+      role="tab"
+      data-tab="calendar"
+      aria-selected="false"
+      aria-controls="screen-calendar"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="12,2 22,12 12,22 2,12"/>
+        <line x1="12" y1="2" x2="12" y2="22"/>
+      </svg>
+      <span class="tab-label">Log</span>
+    </button>
+
+    <!-- Dashboard tab — Segmented circle glyph -->
+    <button
+      class="tab-btn"
+      role="tab"
+      data-tab="dashboard"
+      aria-selected="true"
+      aria-controls="screen-dashboard"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="2" x2="12" y2="22"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <line x1="4.22" y1="4.22" x2="19.78" y2="19.78"/>
+      </svg>
+      <span class="tab-label">Today</span>
+    </button>
+
+    <!-- Profile tab — Ship's wheel glyph (8-spoke) -->
+    <button
+      class="tab-btn"
+      role="tab"
+      data-tab="profile"
+      aria-selected="false"
+      aria-controls="screen-profile"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <!-- Outer ring -->
+        <circle cx="12" cy="12" r="10"/>
+        <!-- Inner hub -->
+        <circle cx="12" cy="12" r="2.5"/>
+        <!-- 8 spokes at 45° intervals -->
+        <line x1="12" y1="2"    x2="12" y2="9.5"/>
+        <line x1="19.07" y1="4.93" x2="14.24" y2="9.76"/>
+        <line x1="22" y1="12"   x2="14.5" y2="12"/>
+        <line x1="19.07" y1="19.07" x2="14.24" y2="14.24"/>
+        <line x1="12" y1="22"   x2="12" y2="14.5"/>
+        <line x1="4.93" y1="19.07" x2="9.76" y2="14.24"/>
+        <line x1="2" y1="12"    x2="9.5" y2="12"/>
+        <line x1="4.93" y1="4.93" x2="9.76" y2="9.76"/>
+      </svg>
+      <span class="tab-label">Profile</span>
+    </button>
+
+  </nav>
+
+  <!-- ── Bottom sheet (shared, single instance) ───────── -->
+  <div id="sheet-overlay" class="sheet-overlay" role="dialog" aria-modal="true"></div>
+  <div id="sheet" class="sheet" aria-live="polite"></div>
+
+</div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

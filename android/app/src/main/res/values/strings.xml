@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sea Service Logger</string>
+    <string name="title_activity_main">Sea Service Logger</string>
+    <string name="package_name">com.seaservicelogger.app</string>
+    <string name="custom_url_scheme">com.seaservicelogger.app</string>
+</resources>

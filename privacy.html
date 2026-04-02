@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Sea Service Logger</title>
+  <style>
+    :root {
+      --bg:      #1a1816;
+      --bg-card: #252220;
+      --border:  #3a3530;
+      --text:    #e8dcc4;
+      --muted:   #a8987a;
+      --accent:  #ff8c32;
+      --mono:    'Courier New', Courier, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.75;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px 80px;
+    }
+    .page { max-width: 680px; margin: 0 auto; }
+    .wordmark {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 40px; display: block;
+    }
+    h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
+    .meta { font-size: 11px; color: var(--muted); margin-bottom: 48px; }
+    h2 {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      margin: 40px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    p  { color: var(--muted); margin-bottom: 14px; }
+    ul { color: var(--muted); padding-left: 20px; margin-bottom: 14px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 500; }
+    a  { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .callout {
+      border: 1px solid var(--border); background: var(--bg-card);
+      padding: 16px 20px; margin: 20px 0;
+    }
+    .callout p { margin: 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .footer { font-size: 11px; color: var(--border); text-align: center; margin-top: 60px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <span class="wordmark">Sea Service Logger</span>
+
+  <h1>Privacy Policy</h1>
+  <p class="meta">Effective date: 1 April 2026 &nbsp;·&nbsp; Version 1.0</p>
+
+  <div class="callout">
+    <p><strong>Summary:</strong> Sea Service Logger stores all your data locally on your device.
+    In version 1, nothing is sent to any server. Your sea service records, vessel details,
+    and location data never leave your phone unless you choose to export a PDF.</p>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>Sea Service Logger is operated as an independent application. For privacy enquiries,
+  contact: <a href="mailto:privacy@seaservicelogger.com">privacy@seaservicelogger.com</a></p>
+  <p>This policy covers the Sea Service Logger Android application and any associated web
+  application hosted at the same domain.</p>
+
+  <h2>2. What data we collect and why</h2>
+  <p>The app collects only what you enter and what your device provides:</p>
+  <ul>
+    <li><strong>Mariner profile</strong> — your name and MMC/CoC number. Used to pre-fill
+    generated documents. Stored locally.</li>
+    <li><strong>Vessel information</strong> — vessel name, official number, GRT, propulsion,
+    flag, and captain contact details. Used to generate compliant sea service documents.
+    Stored locally.</li>
+    <li><strong>Daily log entries</strong> — date, vessel, status (underway/at anchor),
+    waters type, hours, and optional location. This is the core record the app exists to
+    maintain. Stored locally.</li>
+    <li><strong>Device location (GPS)</strong> — optionally used to auto-fill the location
+    field when you log a day. The app requests your location only when you open the log
+    entry form. Raw coordinates are stored in your local log entry if captured.
+    No continuous background tracking occurs.</li>
+  </ul>
+  <p>We do not collect: payment information, biometric data, browsing history, contacts,
+  photos, or any data not listed above.</p>
+
+  <h2>3. How your data is stored</h2>
+  <p>In version 1, all data is stored exclusively in your device's local browser storage
+  (localStorage). This means:</p>
+  <ul>
+    <li>Data does not leave your device over the network</li>
+    <li>Clearing your browser/app data will permanently delete your records — back up via
+    PDF export before doing so</li>
+    <li>Data is not encrypted at rest in v1 (it is in plain text in device storage)</li>
+    <li>Data is not shared between devices</li>
+  </ul>
+
+  <h2>4. Third-party services</h2>
+  <p>When you export a PDF document, the app loads the jsPDF library from a CDN
+  (<strong>cdnjs.cloudflare.com</strong>). This is a one-time network request at export time.
+  No personal data is included in this request — only the library file is fetched.
+  Cloudflare's privacy policy governs this request.</p>
+  <p>No analytics, advertising, crash reporting, or tracking services are active in v1.</p>
+
+  <h2>5. Data sharing</h2>
+  <p>We do not sell, rent, or share your personal data with any third party, except as
+  explicitly initiated by you — for example, when you email a generated PDF to your captain.</p>
+
+  <h2>6. Your rights</h2>
+  <p>Under UK GDPR and the Data Protection Act 2018, you have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> — all your data is visible within the app at all times</li>
+    <li><strong>Rectification</strong> — edit any entry directly in the app</li>
+    <li><strong>Erasure</strong> — delete individual entries or all data by clearing app storage</li>
+    <li><strong>Portability</strong> — export your records as PDF at any time</li>
+  </ul>
+  <p>Because v1 stores data only on your device, exercising these rights is entirely within
+  your control. No request to us is needed.</p>
+
+  <h2>7. Children</h2>
+  <p>The app is intended for maritime professionals. We do not knowingly collect data from
+  persons under 16 years of age.</p>
+
+  <h2>8. Future versions (cloud sync)</h2>
+  <p>A planned future version will offer optional cloud sync (Pro tier). If and when that
+  feature launches, this privacy policy will be updated before activation, and you will be
+  asked to consent to the new terms. Cloud sync will always be opt-in.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>We will post any changes to this page with an updated effective date. Continued use of
+  the app after changes constitutes acceptance. Material changes will be notified in-app.</p>
+
+  <h2>10. Contact</h2>
+  <p>For any privacy question or concern:<br>
+  <a href="mailto:privacy@seaservicelogger.com">privacy@seaservicelogger.com</a></p>
+
+  <hr>
+  <div class="footer">
+    Sea Service Logger · Privacy Policy v1.0 · Effective 1 April 2026
+    <br><br>
+    <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="/">Back to app</a>
+  </div>
+
+</div>
+</body>
+</html>
